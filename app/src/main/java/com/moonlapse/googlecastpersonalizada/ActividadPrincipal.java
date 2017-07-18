@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.cast.Cast;
@@ -29,7 +30,11 @@ public class ActividadPrincipal extends AppCompatActivity {
     private CastSession mCastSession;
     private SessionManager mSessionManager;
     private Button textoButton;
-    private Button fondoButton;
+    private Button fondoButtonAzul;
+    private Button fondoButtonAmarillo;
+    private Button fondoButtonVerde;
+    private Button fondoButtonRojo;
+    private EditText txtTexto;
     CanalCast mCanalCast = new CanalCast();
 
     @Override
@@ -40,8 +45,16 @@ public class ActividadPrincipal extends AppCompatActivity {
         mSessionManager = castContext.getSessionManager();
         textoButton = (Button) findViewById(R.id.btn_texto);
         textoButton.setOnClickListener(btnClickListener);
-        fondoButton = (Button) findViewById(R.id.btn_fondo);
-        fondoButton.setOnClickListener(btnClickListener);
+        fondoButtonAzul = (Button) findViewById(R.id.btn_fondoAzul);
+        fondoButtonAzul.setOnClickListener(btnClickListener);
+        fondoButtonAmarillo = (Button) findViewById(R.id.btn_fondoAmarillo);
+        fondoButtonAmarillo.setOnClickListener(btnClickListener);
+        fondoButtonVerde = (Button) findViewById(R.id.btn_fondoVerde);
+        fondoButtonVerde.setOnClickListener(btnClickListener);
+        fondoButtonRojo = (Button) findViewById(R.id.btn_fondoRojo);
+        fondoButtonRojo.setOnClickListener(btnClickListener);
+
+        txtTexto = (EditText) findViewById(R.id.txtTexto);
     }
 
     @Override
@@ -57,10 +70,19 @@ public class ActividadPrincipal extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_texto:
-                    sendMessage("#T#hola");
+                    sendMessage("#T#"+ txtTexto.getText().toString());
                     break;
-                case R.id.btn_fondo:
+                case R.id.btn_fondoAzul:
                     sendMessage("#F#blue");
+                    break;
+                case R.id.btn_fondoAmarillo:
+                    sendMessage("#F#yellow");
+                    break;
+                case R.id.btn_fondoRojo:
+                    sendMessage("#F#red");
+                    break;
+                case R.id.btn_fondoVerde:
+                    sendMessage("#F#green");
                     break;
             }
         }
@@ -140,7 +162,10 @@ public class ActividadPrincipal extends AppCompatActivity {
 
     private void setSessionStarted(boolean enabled) {
         textoButton.setEnabled(enabled);
-        fondoButton.setEnabled(enabled);
+        fondoButtonAzul.setEnabled(enabled);
+        fondoButtonAmarillo.setEnabled(enabled);
+        fondoButtonRojo.setEnabled(enabled);
+        fondoButtonVerde.setEnabled(enabled);
     }
 
     @Override
